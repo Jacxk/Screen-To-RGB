@@ -10,7 +10,7 @@ from .config import *
 
 last_frame = None
 
-Corsair = CUESDK("src/dll/CUESDK.x64_2015.dll")
+Corsair = CUESDK(icue_dll_path)
 in_control = Corsair.RequestControl(CAM.ExclusiveLightingControl)
 
 if in_control is False:
