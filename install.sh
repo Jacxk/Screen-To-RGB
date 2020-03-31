@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-modules=(
-  "PIL"
-  "numpy"
-  "scipy"
-  "mss"
-)
+echo "Checking python version..."
+IFS=' '
+read -ra ADDR <<<"$(python --version)"
 
-py -3 -m pip install -U pip
+version=$(echo "${ADDR[1]}" | cut -c1)
 
-for module in "${modules[@]}"; do
-  py -3 -m pip install "$module"
-done
+if [ "$version" -eq "3" ]; then
+  echo "Suported version of Python found..."
+else
+  echo "Unsuported version of Python. Please install Python 3."
+  exit 1
+fi
+
+echo "Upgrading pip..."
+python -m pip install --upgrade pip
+
+echo "Installing requirements..."
+pip install -r requirements.txt
