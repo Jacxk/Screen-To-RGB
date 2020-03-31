@@ -12,3 +12,8 @@ This program takes over iCUE and disables lighting options there.
 * Run `install.sh` to install all the dependencies.
 * Edit `config.py` and change `icue_dll_path` to the path of the dll you downloaded.
 * Run `start.sh` to start the program.
+
+
+#### TO-DO:
+* RGB Fusion integration.
+* Maybe other integrations (but I have no way to test them)
