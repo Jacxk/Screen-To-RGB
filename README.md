@@ -1,7 +1,8 @@
 ## Screen To RGB
 
 Sync your RGB lights with your monitor's color.\
-Currently supports `Corsair's iCUE`.
+Currently supports `Corsair's iCUE`.\
+This program takes over iCUE and disables lighting options there.
 
 ### Installation:
 * Clone or download this repo.
