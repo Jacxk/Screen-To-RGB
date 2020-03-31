@@ -2,7 +2,7 @@ import time
 import numpy as np
 import scipy.cluster
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageEnhance
 from mss import mss
 
 from .cue_sdk import *
@@ -45,6 +45,14 @@ def change_led():
 
     codes, _ = scipy.cluster.vq.kmeans(img_array, 1)
     codes = list(map(int, codes[0]))
+
+    saturated_image = ImageEnhance.Color(Image.frombytes(
+        "RGB",
+        (1, 1),
+        bytes(codes)
+    ))
+    saturated_image = saturated_image.enhance(saturation)
+    codes = saturated_image.getpixel((0, 0))
 
     if smooth is False:
         Corsair.set_led_colors(CorsairLedColor(CLK.CLM_1, *codes))
