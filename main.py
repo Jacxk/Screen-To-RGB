@@ -6,3 +6,5 @@ if __name__ == '__main__':
         change_led()
         if wait_for_change is True:
             last_frame = take_screen_shot()
+        if sleep > 0:
+            time.sleep(sleep)
