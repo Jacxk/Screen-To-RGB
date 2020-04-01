@@ -1,15 +1,23 @@
+from enum import Enum
 from functools import partial
-from tkinter import Tk, N, S, E, W, Button, Label, Frame
+from tkinter import Tk, N, S, E, W, Button, Label, Frame, FLAT
 
 root = Tk()
 
 
+class Theme(Enum):
+    PRIMARY = "#202020"
+    SECONDARY = "#606060"
+    TEXT = "#FFFFFF"
+    ACTIVE = "#404040"
+
+
 def test():
-    content = Frame(root, bg="#202020", width=100, height=100)
+    content = Frame(root, bg="#202020")
     content.pack(fill="both", expand=True)
 
     title = Label(content, text="Screen To RGB")
-    title.configure(bg="#202020", fg="white", font=("Helvetica", 30))
+    title.configure(bg=Theme.PRIMARY.value, fg="white", font=("Helvetica", 30))
     title.grid(
         column=0,
         row=0,
@@ -18,7 +26,7 @@ def test():
         sticky=N,
     )
 
-    mode = Frame(content)
+    mode = Frame(content, bg=Theme.PRIMARY.value)
     mode.grid(
         column=0,
         row=0,
@@ -33,6 +41,7 @@ def test():
         column=1,
         row=1,
         sticky=N,
+        rowspan=3,
     )
 
     desc = [
@@ -42,19 +51,42 @@ def test():
 
     label = Label(option, text=desc[0])
     label.grid(column=0, row=0)
-    label.configure(bg="#202020", fg="white", font=("Helvetica", 16))
+    label.configure(bg=Theme.PRIMARY.value, fg=Theme.TEXT.value, font=("Helvetica", 16))
 
-    root.bind("<Configure>", lambda _: label.configure(wraplength=root.winfo_width()/1.5))
+    root.bind("<Configure>", lambda _: label.configure(wraplength=root.winfo_width() / 1.5))
 
-    buttons = [
-        Button(mode, text="Screen Reactive"),
-        Button(mode, text="Keyboard Input")
+    buttons_name = [
+        "Screen Reactive",
+        "Keyboard Input"
     ]
 
-    for i, button in enumerate(buttons):
+    buttons = []
+
+    def on_click(p, button, _):
+        for btn in buttons:
+            btn.configure(bg=Theme.PRIMARY.value)
+
+        button.configure(bg=Theme.ACTIVE.value)
+        label.configure(text=desc[p])
+
+    for i, btxText in enumerate(buttons_name):
+        button = Button(mode, text=btxText)
         button.grid(column=0, row=i)
-        button.configure(bg="#202020", fg="white")
-        button.bind("<Button-1>", partial(lambda p, e: label.configure(text=desc[p]), i))
+        button.configure(
+            bg=Theme.PRIMARY.value,
+            activebackground=Theme.SECONDARY.value,
+            activeforeground=Theme.TEXT.value,
+            fg=Theme.TEXT.value,
+            relief=FLAT,
+            bd=0,
+            padx=50,
+            pady=5
+        )
+
+        button.bind("<Button-1>", partial(on_click, i, button))
+        buttons.append(button)
+
+    on_click(0, buttons[0], None)
 
     content.columnconfigure(0, weight=1)
     content.rowconfigure(0, weight=1)
