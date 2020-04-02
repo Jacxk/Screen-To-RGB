@@ -1,52 +1,29 @@
-from tkinter import Frame, Button, Label, Listbox, StringVar
+from .option import OptionButton, OptionButtonFrame, OptionFrame, buttons
 
 
-class Window(Frame):
-    def __init__(self, master=None, conf=None, **kw):
-        if conf is None:
-            conf = {}
-        Frame.__init__(self, master, conf, **kw)
-        self.master = master
-        self.exitButton = None
-        self.label = None
-        self.list = None
-        self.i = 0
+def open_window(master, root):
+    mode_frame = OptionButtonFrame(master)
 
-        self.create_button()
-        self.create_label()
-        self.create_list_box()
+    option_frames = [
+        OptionFrame(
+            master,
+            "Your RGB lights will adjust according to what you have and your screen.",
+            root
+        ),
+        OptionFrame(
+            master,
+            "Your RGB lights will change every time you hit a key on your keyboard or mouse.",
+            root
+        ),
+    ]
 
-    def create_button(self):
-        self.exitButton = Button(
-            master=self.master,
-            text="Exit",
-            command=exit
-        )
-        self.exitButton.place(x=0, y=0)
-
-    def create_label(self):
-        self.label = Label(
-            master=self.master,
-            text=self.i,
-            fg="Red"
-        )
-        self.label.place(x=50, y=50)
-        self.increment()
-
-    def create_list_box(self):
-        items = StringVar()
-        items.set(("React with screen", "Change with keys"))
-
-        list = Listbox(
-            master=self.master,
-            listvariable=items
-        )
-        list.pack()
-        list.bind("<<ListboxSelect>>", lambda _: print(list.curselection()[0]))
-
-        self.list = list
-
-    def increment(self):
-        self.i += 1
-        self.label.configure(text=self.i)
-        self.after(1000, self.increment)
+    OptionButton(
+        mode_frame.get_frame(),
+        "Screen Reactive",
+        option_frames
+    ).show().set_hoverable()
+    OptionButton(
+        mode_frame.get_frame(),
+        "Keyboard Input",
+        option_frames
+    ).set_hoverable()
