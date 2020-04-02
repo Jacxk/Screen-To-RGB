@@ -8,7 +8,7 @@ buttons = []
 
 def create_button(frame, text, target_frames):
     button = OptionButton(frame, text, target_frames).set_hoverable()
-    if len(buttons) == 0:
+    if len(buttons) == 1:
         button.show()
 
     return button
@@ -18,7 +18,7 @@ class ScrollableFrame(Frame):
     def __init__(self, container, *args, **kwargs):
         super().__init__(container, *args, **kwargs)
 
-        background = Theme.MODES.value
+        background = self.cget('bg')
         self.canvas = canvas = Canvas(self)
 
         scrollbar = Scrollbar(self, orient="vertical", command=canvas.yview)
@@ -136,7 +136,7 @@ class OptionFrame:
 
 class OptionButtonFrame:
     def __init__(self, master):
-        self.frame = ScrollableFrame(master)
+        self.frame = ScrollableFrame(master, bg=Theme.MODES.value)
         self.frame.canvas.configure(width=240)
         self._create()
 
@@ -215,8 +215,6 @@ class OptionButton:
 
         if active:
             self.button.configure(bg=Theme.ACTIVE.value)
-        else:
-            self.button.configure(bg=self.master.cget("bg"))
 
         self.active = active
         return self
