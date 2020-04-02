@@ -1,18 +1,22 @@
 from tkinter import Label, NSEW
 
-from .option import OptionButton, OptionButtonFrame, OptionFrame, create_button, ScrollableFrame
+from .option import OptionButtonFrame, OptionFrame, create_button
 from ..Enums import Theme
+from ...index import change_led
+
+loop_functions = {}
 
 
-def open_window(master, root):
+def add_to_loop(func):
+    loop_functions[func.__name__] = func
+
+
+def create_app(master, root):
     mode_frame = OptionButtonFrame(master)
 
     option_frames = [
         OptionFrame(
             master,
-            "Your RGB lights will adjust according to what you have and your screen."+
-            "Your RGB lights will adjust according to what you have and your screen."+
-            "Your RGB lights will adjust according to what you have and your screen."+
             "Your RGB lights will adjust according to what you have and your screen."
             ,
             root
@@ -37,6 +41,23 @@ def open_window(master, root):
         sticky=NSEW,
     )
 
-    create_button(mode_frame.get_frame(), "Screen Reactive", option_frames)
-    create_button(mode_frame.get_frame(), "Keyboard Input", option_frames)
+    create_button(
+        mode_frame.get_frame(),
+        "Screen Reactive",
+        option_frames,
+    ).on_click(lambda: add_to_loop(change_led))
+    create_button(
+        mode_frame.get_frame(),
+        "Keyboard Input",
+        option_frames,
+    ).on_click(lambda: print("Coming Soon!"))
 
+    def start_loop(time=20):
+        def task():
+            for name in loop_functions:
+                loop_functions[name]()
+            root.after(time, task)
+
+        root.after(time, task)
+
+    start_loop()

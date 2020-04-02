@@ -157,6 +157,7 @@ class OptionButton:
     def __init__(self, master, text, frames: [OptionFrame] = []):
         global buttons
         self.active = False
+        self.click_cb = None
         self.text = text
         self.master = master
         self.frames = frames
@@ -186,10 +187,14 @@ class OptionButton:
         return self
 
     def _on_click(self, _):
-        if len(self.frames) < self.id + 1:
-            pass
+        if self.click_cb is not None:
+            self.click_cb()
 
         self.show()
+
+    def on_click(self, func):
+        self.click_cb = func
+        return self
 
     def set_hoverable(self):
 

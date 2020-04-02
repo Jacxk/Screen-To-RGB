@@ -1,7 +1,7 @@
 from tkinter import Tk, N, Label, Frame, S
 
 from .Enums import Theme
-from .window.main import open_window
+from .window.main import create_app
 
 root = Tk()
 
@@ -17,10 +17,10 @@ def start():
         row=0,
         columnspan=999,
         pady=10,
-        sticky=N+S,
+        sticky=N + S,
     )
 
-    open_window(content, root)
+    create_app(content, root)
 
     content.columnconfigure(1, weight=1)
     content.rowconfigure(1, weight=1)
