@@ -1,4 +1,4 @@
-from tkinter import Tk, N, Label, Frame
+from tkinter import Tk, N, Label, Frame, S
 
 from .Enums import Theme
 from .window.main import open_window
@@ -13,11 +13,11 @@ def start():
     title = Label(content, text="Screen To RGB")
     title.configure(bg=Theme.PRIMARY.value, fg="white", font=("Helvetica", 30))
     title.grid(
-        column=0,
+        column=1,
         row=0,
-        columnspan=2,
+        columnspan=999,
         pady=10,
-        sticky=N,
+        sticky=N+S,
     )
 
     open_window(content, root)
