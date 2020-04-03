@@ -17,3 +17,6 @@ This program takes over iCUE and disables lighting options there.
 #### TO-DO:
 * RGB Fusion integration.
 * Maybe other integrations (but I have no way to test them)
+
+#### Pictures
+![Show Off 1](./__assets__/show_off_1.gif)
