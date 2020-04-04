@@ -16,6 +16,7 @@ class SDK:
         """
         Enables this SDK.
         """
+        print(f"SDK '{self.name}' has been enabled")
         self.enabled = True
         pass
 
@@ -23,6 +24,7 @@ class SDK:
         """
         Disables this SDK.
         """
+        print(f"SDK '{self.name}' has been disabled")
         self.enabled = False
         pass
 
