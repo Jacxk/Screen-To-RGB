@@ -1,5 +1,5 @@
-from src.cue_sdk import CUESDK, CAM, CorsairLedColor, CLK
-from src.cue_sdk.exceptions import ServerNotFound
+from src.wrappers.cue_sdk import CUESDK, CAM, CorsairLedColor, CLK
+from src.wrappers.cue_sdk.exceptions import ServerNotFound
 from src.interface.sdk import SDK
 
 
