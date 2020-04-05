@@ -1,3 +1,4 @@
+keyboard
 altgraph==0.17
 future==0.18.2
 mss==5.0.0

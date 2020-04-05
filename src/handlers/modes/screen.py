@@ -9,7 +9,6 @@ from src.interface.mode import Mode
 class ScreenReact(Mode):
     def __init__(self, **kwargs):
         super().__init__("Screen Reactive", **kwargs)
-        self.enable()
 
     def run(self):
         while self.enabled:

@@ -5,6 +5,7 @@ class Mode:
         self.sdks = kwargs.get("sdks", [])
         self.enabled = kwargs.get("enable", False)
         self.color = kwargs.get("color", (0, 0, 0))
+        self.enable()
 
     def run(self):
         """
