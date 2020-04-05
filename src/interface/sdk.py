@@ -1,6 +1,3 @@
-from src.interface.mode import Mode
-
-
 class SDK:
     def __init__(self, name):
         self.name = name
@@ -34,9 +31,3 @@ class SDK:
         """
         pass
 
-    def enable_mode(self, mode: Mode):
-        """
-        Enable mode on this SDK
-        :param mode:
-        """
-        pass
