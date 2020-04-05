@@ -2,6 +2,7 @@ class Mode:
     def __init__(self, name, **kwargs):
         self.name = name
         self.available = True
+        self.sdks = kwargs.get("sdks", [])
         self.enabled = kwargs.get("enable", False)
         self.color = kwargs.get("color", (0, 0, 0))
 
@@ -31,4 +32,4 @@ class Mode:
         """
         Get the RGB colors of this mode
         """
-        pass
+        return self.color

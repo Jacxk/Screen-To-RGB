@@ -12,9 +12,9 @@ class ScreenReact(Mode):
         super().__init__("Screen Reactive", **kwargs)
         self.enable()
 
-    def run(self, *sdks: SDK):
+    def run(self, ):
         while self.enabled:
-            for sdk in sdks:
+            for sdk in self.sdks:
                 if not sdk.enabled:
                     return
                 sdk.change_colors(self.get_dominant_color())
@@ -34,4 +34,5 @@ class ScreenReact(Mode):
         img_array = img_array.reshape(np.product(shape[:2]), shape[2]).astype(float)
 
         codes, _ = cluster.vq.kmeans(img_array, 1)
-        return list(map(int, codes[0]))
+        self.color = list(map(int, codes[0]))
+        return self.color
