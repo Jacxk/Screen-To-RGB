@@ -1,10 +1,9 @@
+import numpy as np
 from PIL import Image
 from mss import mss
-import numpy as np
 from scipy import cluster
 
 from src.interface.mode import Mode
-from src.interface.sdk import SDK
 
 
 class ScreenReact(Mode):
@@ -12,7 +11,7 @@ class ScreenReact(Mode):
         super().__init__("Screen Reactive", **kwargs)
         self.enable()
 
-    def run(self, ):
+    def run(self):
         while self.enabled:
             for sdk in self.sdks:
                 if not sdk.enabled:

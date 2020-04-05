@@ -6,7 +6,7 @@ class Mode:
         self.enabled = kwargs.get("enable", False)
         self.color = kwargs.get("color", (0, 0, 0))
 
-    def run(self, *sdks):
+    def run(self):
         """
         Starts running the RGB mode.
         """

@@ -18,8 +18,8 @@ class iCue(SDK):
             return False
 
     def enable(self):
+        self.enabled = self.sdk.request_control(access_mode=CAM.ExclusiveLightingControl)
         super().enable()
-        self.sdk.request_control(access_mode=CAM.ExclusiveLightingControl)
 
         for i in range(self.sdk.get_device_count()):
             info = self.sdk.get_device_info(i)

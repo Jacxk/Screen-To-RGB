@@ -13,8 +13,9 @@ class SDK:
         """
         Enables this SDK.
         """
-        print(f"SDK '{self.name}' has been enabled")
-        self.enabled = True
+        if not self.enabled:
+            raise Exception(f"Could not enable {self.name} SDK!")
+        print(f"Support for '{self.name}' SDK has been enabled")
         pass
 
     def disable(self):
