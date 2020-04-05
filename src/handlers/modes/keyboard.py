@@ -11,6 +11,8 @@ class KeyboardPress(Mode):
         self.random = kwargs.get("random", True)
 
     def run(self):
+        super().run()
+
         def callback(_):
             for sdk in self.sdks:
                 if not sdk.enabled:

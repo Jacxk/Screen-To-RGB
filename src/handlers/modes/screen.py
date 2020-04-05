@@ -11,6 +11,7 @@ class ScreenReact(Mode):
         super().__init__("Screen Reactive", **kwargs)
 
     def run(self):
+        super().run()
         while self.enabled:
             for sdk in self.sdks:
                 if not sdk.enabled:
