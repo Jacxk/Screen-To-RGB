@@ -12,10 +12,10 @@ class ScreenReact(Mode):
 
     def run(self):
         super().run()
-        while self.enabled:
+        while self.enabled and self.active:
             for sdk in self.sdks:
-                if not sdk.enabled:
-                    return
+                if not sdk.enabled or not self.active:
+                    break
                 sdk.change_colors(self.get_dominant_color())
         pass
 

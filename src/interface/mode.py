@@ -1,3 +1,5 @@
+from threading import Thread
+
 available_modes = []
 
 
@@ -6,6 +8,7 @@ class Mode:
         self.name = name
         self.active = False
         self._too_many = False
+        self.running_thread = None
 
         self.sdks = kwargs.get("sdks", [])
         self.enabled = kwargs.get("enable", False)
@@ -17,13 +20,19 @@ class Mode:
         available_modes.append(self)
         self.available_modes = available_modes
 
+    def start(self):
+        if self.running_thread is None:
+            self.running_thread = Thread(name=self.name, target=self.run)
+            self.running_thread.start()
+
     def run(self):
         """
         Starts running the RGB mode.
         """
+        self.enable()
         print(f"Running mode '{self.name}'...")
         for mode in available_modes:
-            if mode.active and mode.name is not self.name:
+            if mode.enabled and mode.active and mode.name is not self.name:
                 mode._too_many = True
                 mode.disable()
         pass
@@ -47,6 +56,7 @@ class Mode:
             print(f"Mode '{self.name}' has been disabled")
         self.enabled = False
         self.active = False
+        self._too_many = False
         pass
 
     def get_color(self):

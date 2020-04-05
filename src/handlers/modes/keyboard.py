@@ -21,7 +21,9 @@ class KeyboardPress(Mode):
                     sdk.change_colors((randrange(0, 255), randrange(0, 255), randrange(0, 255)))
 
         keyboard.on_press(callback)
-        keyboard.wait()
+
+        while self.active:
+            pass
 
     def disable(self):
         keyboard.unhook_all()
