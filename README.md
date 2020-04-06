@@ -20,3 +20,4 @@ This program takes over iCUE and disables lighting options there.
 
 #### Pictures
 ![Show Off 1](./__assets__/show_off_1.gif)
+![Show Off 2](./__assets__/show_off_2.gif)
