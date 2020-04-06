@@ -21,12 +21,13 @@ class iCue(SDK):
         self.enabled = self.sdk.request_control(access_mode=CAM.ExclusiveLightingControl)
         super().enable()
 
-        for i in range(self.sdk.get_device_count()):
+        count = self.sdk.get_device_count()
+        print(f"    Devices found: {count}")
+        for i in range(count):
             info = self.sdk.get_device_info(i)
             self.devices.append(info)
             print(
-                f"({i + 1}) Device found. "
-                f"Type: '{info.type.name}'; "
+                f"      ({i + 1}) Type: '{info.type.name}'; "
                 f"Model: '{info.model}'; "
             )
 
