@@ -10,13 +10,8 @@ class ScreenReact(Mode):
     def __init__(self, **kwargs):
         super().__init__("Screen Reactive", **kwargs)
 
-    def run(self):
-        super().run()
-        while self.enabled and self.active:
-            for sdk in self.sdks:
-                if not sdk.enabled or not self.active:
-                    break
-                sdk.change_colors(self.get_dominant_color())
+    def _exec(self):
+        self.set_color(self.get_dominant_color())
         pass
 
     def get_screen(self):

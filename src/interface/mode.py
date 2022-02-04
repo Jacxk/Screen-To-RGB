@@ -35,6 +35,15 @@ class Mode:
             if mode.enabled and mode.active and mode.name is not self.name:
                 mode._too_many = True
                 mode.disable()
+
+        while self.enabled and self.active:
+            self._exec()
+        pass
+
+    def _exec(self):
+        """
+        Mode's execution logic.
+        """
         pass
 
     def enable(self):
@@ -64,3 +73,13 @@ class Mode:
         Get the RGB colors of this mode
         """
         return self.color
+
+    def set_color(self, **kwargs):
+        """
+        Set the RGB colors to be displayed with the SDKs
+        """
+        self.color = kwargs.get("color")
+        for sdk in self.sdks:
+            if sdk.enabled:
+                sdk.change_colors(self.get_color())
+        return self

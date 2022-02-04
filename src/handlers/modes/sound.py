@@ -7,6 +7,7 @@ class SoundReact(Mode):
     def __init__(self, **kwargs):
         super().__init__("Sound Reactive", **kwargs)
 
+    # TODO: Finish this implementation
     def run(self):
         super().run()
 
@@ -16,9 +17,6 @@ class SoundReact(Mode):
 
         with sd.InputStream(callback=print_sound):
             sd.sleep(10000)
-
-        while self.active:
-            pass
 
     def disable(self):
         super().disable()

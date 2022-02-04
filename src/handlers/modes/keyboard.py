@@ -11,19 +11,14 @@ class KeyboardPress(Mode):
         self.random = kwargs.get("random", True)
 
     def run(self):
+        def _callback(_):
+            if self.random:
+                self.set_color((randrange(0, 255), randrange(0, 255), randrange(0, 255)))
+            # TODO: Custom colors
+
+        keyboard.on_press(_callback)
+
         super().run()
-
-        def callback(_):
-            for sdk in self.sdks:
-                if not sdk.enabled:
-                    return
-                if self.random:
-                    sdk.change_colors((randrange(0, 255), randrange(0, 255), randrange(0, 255)))
-
-        keyboard.on_press(callback)
-
-        while self.active:
-            pass
 
     def disable(self):
         keyboard.unhook_all()
