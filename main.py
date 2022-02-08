@@ -9,9 +9,9 @@ if __name__ == '__main__':
     icue_sdk = iCue(icue_dll_path)
 
     if icue_sdk.available():
-        #screen_mode = ScreenReact(sdks=[icue_sdk])
+        screen_mode = ScreenReact(sdks=[icue_sdk])
         #keyboard = KeyboardPress(sdks=[icue_sdk])
-        sound = SoundReact(sdks=[icue_sdk])
-        sound.start()
+        #sound = SoundReact(sdks=[icue_sdk])
+        #sound.start()
         #keyboard.start()
-        #screen_mode.start()
+        screen_mode.start()

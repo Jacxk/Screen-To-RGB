@@ -2,7 +2,7 @@
 
 echo "Checking python version..."
 IFS=' '
-read -ra ADDR <<<"$(python --version)"
+read -ra ADDR <<<"$(python3 --version)"
 
 version=$(echo "${ADDR[1]}" | cut -c1)
 
@@ -14,7 +14,7 @@ else
 fi
 
 echo "Upgrading pip..."
-python -m pip install --upgrade pip
+python3 -m pip3 install --upgrade pip3
 
 echo "Installing requirements..."
-pip install -r requirements.txt
+pip3 install -r requirements.txt

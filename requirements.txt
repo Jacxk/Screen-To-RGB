@@ -12,6 +12,5 @@ pefile==2019.4.18
 Pillow==9.0.0
 PyInstaller==3.6
 pywin32-ctypes==0.2.0
-scipy==1.4.1
+scipy==1.8.0
 six==1.14.0
-wrapt==1.12.1
