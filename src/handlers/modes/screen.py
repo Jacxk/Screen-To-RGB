@@ -11,7 +11,7 @@ class ScreenReact(Mode):
         super().__init__("Screen Reactive", **kwargs)
 
     def _exec(self):
-        self.set_color(self.get_dominant_color())
+        self.set_color(color=self.get_dominant_color())
         pass
 
     def get_screen(self):
@@ -19,7 +19,7 @@ class ScreenReact(Mode):
             sct_img = sct.grab(sct.monitors[0])
 
             img = Image.frombytes("RGB", sct_img.size, sct_img.bgra, "raw", "BGRX")
-            img = img.resize((1, 1))
+            img = img.resize((100, 100))
             return img
 
     def get_dominant_color(self):

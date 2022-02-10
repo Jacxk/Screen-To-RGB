@@ -1,6 +1,5 @@
 from random import randrange
-
-import keyboard
+from pynput import keyboard
 
 from src.interface.mode import Mode
 
@@ -11,12 +10,14 @@ class KeyboardPress(Mode):
         self.random = kwargs.get("random", True)
 
     def run(self):
-        def _callback(_):
+        def _on_press(_):
             if self.random:
-                self.set_color((randrange(0, 255), randrange(0, 255), randrange(0, 255)))
+                self.set_color(
+                    color=(randrange(0, 255), randrange(0, 255), randrange(0, 255)))
             # TODO: Custom colors
 
-        keyboard.on_press(_callback)
+        listener = keyboard.Listener(on_press=_on_press)
+        listener.start()
 
         super().run()
 
