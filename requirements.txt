@@ -3,7 +3,6 @@ astroid==2.3.3
 colorama==0.4.3
 future==0.18.2
 isort==4.3.21
-keyboard==0.13.5
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 mss==5.0.0
@@ -15,3 +14,4 @@ pywin32-ctypes==0.2.0
 scipy==1.8.0
 six==1.14.0
 cuesdk==1.1.0
+pynput==1.7.6
