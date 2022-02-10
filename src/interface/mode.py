@@ -24,7 +24,7 @@ class Mode:
     def start(self):
         if self.running_thread is None:
             self.running_thread = Thread(
-                name=self.name, target=self.run, daemon=True)
+                name=self.name, target=self.run)
             self.running_thread.start()
 
     def run(self):

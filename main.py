@@ -1,4 +1,4 @@
-from src.handlers.modes import screen, keyboard, sound
+from src.handlers.modes import screen, keyboard
 from src.handlers.sdk.icue import iCue
 
 if __name__ == '__main__':
@@ -14,6 +14,3 @@ if __name__ == '__main__':
         # sound.start()
         # keyboard.start()
         screen_mode.start()
-
-    while True:
-        pass
