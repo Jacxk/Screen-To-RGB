@@ -13,8 +13,7 @@ class SDK:
         """
         Enables this SDK.
         """
-        if not self.enabled:
-            raise Exception(f"Could not enable {self.name} SDK!")
+        self.enabled = True
         print(f"Support for '{self.name}' SDK has been enabled")
         pass
 
@@ -31,4 +30,3 @@ class SDK:
         Change lights' colors.
         """
         pass
-

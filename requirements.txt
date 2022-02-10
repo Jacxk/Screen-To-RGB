@@ -14,3 +14,4 @@ PyInstaller==3.6
 pywin32-ctypes==0.2.0
 scipy==1.8.0
 six==1.14.0
+cuesdk==1.1.0

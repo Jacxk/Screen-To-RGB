@@ -1,34 +1,31 @@
 from src.interface.sdk import SDK
-from src.wrappers.cue_sdk import CUESDK, CAM, CorsairLedColor, CorsairDeviceInfo, CDT
-from src.wrappers.cue_sdk.exceptions import ServerNotFound
+from cuesdk import CueSdk
 
 
 class iCue(SDK):
-    def __init__(self, dll_path):
+    def __init__(self):
         super().__init__("iCue")
-        self.sdk = CUESDK(dll_path)
-        self.devices = []
-        self.enable()
+        self.sdk = CueSdk()
+        self.devices = {}
 
     def available(self):
-        try:
-            self.sdk.perform_protocol_handshake()
+        if self.sdk.connect():
+            self.enable()
             return True
-        except ServerNotFound:
-            return False
+
+        print("Handshake failed: %s" % self.sdk.get_last_error())
+        return False
 
     def enable(self):
-        self.enabled = self.sdk.request_control(access_mode=CAM.ExclusiveLightingControl)
         super().enable()
 
-        count = self.sdk.get_device_count()
-        print(f"    Devices found: {count}")
-        for i in range(count):
-            info = self.sdk.get_device_info(i)
-            self.devices.append(info)
+        devices = self.sdk.get_devices()
+        print(f"    Devices found: {len(devices)}")
+        for device in devices:
+            self.devices[device.id] = device
             print(
-                f"      ({i + 1}) Type: '{info.type.name}'; "
-                f"Model: '{info.model}'; "
+                f"      ({device.id}) Type: '{str(device.type).split('.')[-1]}'; "
+                f"Model: '{device.model}'; "
             )
 
         return self
@@ -39,30 +36,23 @@ class iCue(SDK):
 
     def change_colors(self, rgb=(255, 255, 255)):
         if not self.enabled:
-            raise Exception(f"Trying to change colors while {self.name} SDK is disabled")
+            raise Exception(
+                f"Trying to change colors while {self.name} SDK is disabled")
+        all_leds = self.get_available_leds()
+        for device in range(len(all_leds)):
+            leds = all_leds[device]
+            for led in leds:
+                leds[led] = rgb
+            self._set_color(device, leds)
 
-        for device in self.devices:
-            self._set_color(device, rgb)
+        self.sdk.set_led_colors_flush_buffer()
 
         pass
 
-    def _set_color(self, device: CorsairDeviceInfo, rgb):
-        device_type = device.type
-        sdk = self.sdk
+    def get_available_leds(self):
+        leds = [self.sdk.get_led_positions_by_device_index(
+            index) for index in range(len(self.devices))]
+        return leds
 
-        if device_type is CDT.Mouse:
-            for i in range(4):
-                color = CorsairLedColor(148 + i, *rgb)
-                sdk.set_led_colors(color)
-        elif device_type is CDT.Keyboard:
-            for i in range(147):
-                color = CorsairLedColor(i + 1, *rgb)
-                sdk.set_led_colors(color)
-        elif device_type is CDT.Headset:
-            for i in range(2):
-                color = CorsairLedColor(152 + i, *rgb)
-                sdk.set_led_colors(color)
-        elif device_type is CDT.Unknown:
-            for i in range(154):
-                color = CorsairLedColor(i + 1, *rgb)
-                sdk.set_led_colors(color)
+    def _set_color(self, device, rgb):
+        self.sdk.set_led_colors_buffer_by_device_index(device, rgb)
