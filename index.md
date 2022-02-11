@@ -3,16 +3,16 @@ Sync all your RGB lights with the program without having to manually change them
 Besides there are some presets that can be installed.
 
 ## Supported Software
-* :heavy_check_mark: iCue: Corsair
-* :pencil2: Govee
-* :x: RGB Fusion
-* :x: Razer Chroma
-* :x: ASROCK POLYCHROME
-* :x: Philips Hue
+* ✔️ iCue: Corsair
+* ✏️ Govee
+* ❌ RGB Fusion
+* ❌ Razer Chroma
+* ❌ ASROCK POLYCHROME
+* ❌ Philips Hue
 
-:heavy_check_mark: Fully Supported, 
-:pencil2: Working on it, 
-:x: Not yet supported
+✔️ Fully Supported, 
+✏️ Working on it, 
+❌ Not yet supported
 
 ## Modes
 * Screen Reactive: Synchronize your LEDs with the screen.
