@@ -1,7 +1,6 @@
+from signal import SIGINT, SIGTERM, signal
 from src.interface.mode import available_modes
-from src.handlers.modes import screen, keyboard
-from src.handlers.sdk.icue import iCue
-import signal
+from src.util import initialize_modes, initialize_sdks
 
 
 def on_exit(*args):
@@ -10,20 +9,25 @@ def on_exit(*args):
         mode.disable()
     pass
 
-signal.signal(signal.SIGINT, on_exit)
-signal.signal(signal.SIGTERM, on_exit)
+signal(SIGINT, on_exit)
+signal(SIGTERM, on_exit)
     
 
 if __name__ == '__main__':
     print("Program initiated!")
-    icue_sdk = iCue()
-
-    sdks = [icue_sdk]
-
-    if icue_sdk.available():
-        screen_mode = screen.ScreenReact(sdks=sdks)
-        #keyboard = keyboard.KeyboardPress(sdks=sdks)
-        #sound = sound.SoundReact(sdks=sdks)
-        # sound.start()
-        # keyboard.start()
-        screen_mode.start()
+    sdks = initialize_sdks()
+    
+    sdk_list = []
+    
+    for SDK in sdks:
+        sdk = SDK()
+        if not sdk.available():
+            continue
+        
+        sdk_list.append(sdk)
+        
+    modes = [mode(sdks=sdk_list) for mode in initialize_modes()]
+    for mode in modes:
+        if 'Screen' in mode.name:
+            mode.start()
+        
