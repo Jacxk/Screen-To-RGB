@@ -3,14 +3,14 @@ Sync all your RGB lights with the program without having to manually change them
 Besides there are some presets that can be installed.
 
 ## Supported Software
-* ✔️ iCue: Corsair
+* ✅ iCue: Corsair
 * ✏️ Govee
 * ❌ RGB Fusion
 * ❌ Razer Chroma
 * ❌ ASROCK POLYCHROME
 * ❌ Philips Hue
 
-✔️ Fully Supported, 
+✅ Fully Supported, 
 ✏️ Working on it, 
 ❌ Not yet supported
 
@@ -19,11 +19,11 @@ Besides there are some presets that can be installed.
 * Keyboard Touch: Change lighting when a key is pressed.
 
 ## Windows
-![Show Off 1](https://github.com/Jacxk/Screen-To-RGB/blob/master/__assets__/show_off_1.gif?raw=true)
-![Show Off 2](https://github.com/Jacxk/Screen-To-RGB/blob/master/__assets__/show_off_2.gif?raw=true)
+![Win - Show Off 1](./__assets__/windows/show_off_1.gif?raw=true)
+![Win - Show Off 2](./__assets__/windows/show_off_2.gif?raw=true)
 
 ## MacOS
-*Soon, just need to make the gif*
+![Mac - Show Off 1](./__assets__/macos/show_off_1.gif?raw=true)
 
 ## Linux
 *Unsupported for now*
