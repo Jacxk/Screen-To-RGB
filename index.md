@@ -19,11 +19,11 @@ Besides there are some presets that can be installed.
 * Keyboard Touch: Change lighting when a key is pressed.
 
 ## Windows
-![Win - Show Off 1](./__assets__/windows/show_off_1.gif?raw=true)
-![Win - Show Off 2](./__assets__/windows/show_off_2.gif?raw=true)
+![Win - Show Off 1](./assets/images/windows/show_off_1.gif)
+![Win - Show Off 2](./assets/images/windows/show_off_2.gif)
 
 ## MacOS
-![Mac - Show Off 1](./__assets__/macos/show_off_1.gif?raw=true)
+![Mac - Show Off 1](./assets/images/macos/show_off_1.gif)
 
 ## Linux
 *Unsupported for now*
