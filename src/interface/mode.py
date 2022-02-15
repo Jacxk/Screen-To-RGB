@@ -12,7 +12,7 @@ class Mode:
 
         self.sdks = kwargs.get("sdks", [])
         self.enabled = kwargs.get("enable", True)
-        self.color = kwargs.get("color", (0, 0, 0))
+        self.color = kwargs.get("color", None)
         
         print(f"Enabling {self.name}.")
 
