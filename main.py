@@ -26,8 +26,9 @@ if __name__ == '__main__':
         
         sdk_list.append(sdk)
         
-    modes = [mode(sdks=sdk_list) for mode in initialize_modes()]
+    modes = [mode(sdks=sdk_list,enable=False) for mode in initialize_modes()]
     for mode in modes:
-        if 'Screen' in mode.name:
+        if 'Key' in mode.name:
+            mode.enable()
             mode.start()
         

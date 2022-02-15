@@ -8,7 +8,7 @@ from .interface.sdk import SDK
 def initialize_modes() -> List[Mode]:
     modes = []
     paths = list(Path("src/handlers/modes").rglob("*.py"))
-    paths = [*map(lambda path: match(r'.*/(.*)\.py', str(path)).group(1), paths)]
+    paths = [*map(Path.stem.fget, paths)]
 
     for path in paths:
         mod = __import__(f'src.handlers.modes.{path}', fromlist=[path])
@@ -20,7 +20,7 @@ def initialize_modes() -> List[Mode]:
 def initialize_sdks() -> List[SDK]:
     sdks = []
     paths = list(Path("src/handlers/sdk").rglob("*.py"))
-    paths = [*map(lambda path: match(r'.*/(.*)\.py', str(path)).group(1), paths)]
+    paths = [*map(Path.stem.fget, paths)]
 
     for path in paths:
         mod = __import__(f'src.handlers.sdk.{path}', fromlist=[path])
