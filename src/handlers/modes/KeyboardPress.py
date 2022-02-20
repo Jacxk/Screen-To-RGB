@@ -1,5 +1,6 @@
 from random import randrange
-from time import sleep
+from threading import Thread
+from queue import Queue
 from pynput import keyboard
 from ...color import fade_between
 
@@ -12,20 +13,37 @@ class KeyboardPress(Mode):
         self.random = kwargs.get("random", True)
         self.listener = None
         self.color = [0, 0, 0]
+        self.input_thread = None
+        self.queue = Queue()
 
     def _on_key(self, key):
-        self.pressed_key = key
         if self.random:
-            [self.set_color(color=c) for c in fade_between(self.color)]
+            self.queue.put(key)
+            if not self.input_thread:
+                self.input_thread = Thread(name=self.name, target=self._change_color, daemon=True)
+                self.input_thread.start() 
+
+
+    def start(self):
+        return super().start()
 
     def run(self):
         if self.listener is not None:
             self.listener.start()
-
         super().run()
 
+    def _change_color(self):
+        while not self.queue.empty():
+            for _ in range(self.queue.qsize()):
+                self.queue.get()
+                self.queue.task_done()
+            
+            for c in fade_between(self.color):
+                self.set_color(color=c)
+        self.input_thread = None 
+
     def enable(self):
-        self.listener = keyboard.Listener(on_press=self._on_key)
+        self.listener = keyboard.Listener(on_release=self._on_key)
         super().enable()
 
     def disable(self):
