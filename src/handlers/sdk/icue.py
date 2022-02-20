@@ -1,4 +1,4 @@
-from src.interface.sdk import SDK
+from ...interface.sdk import SDK
 from cuesdk import CueSdk
 
 

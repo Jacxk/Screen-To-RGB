@@ -1,4 +1,4 @@
-from src.interface.mode import Mode
+from ...interface.mode import Mode
 import numpy as np
 
 

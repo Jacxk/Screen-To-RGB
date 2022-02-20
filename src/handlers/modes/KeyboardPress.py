@@ -4,7 +4,7 @@ from queue import Queue
 from pynput import keyboard
 from ...color import fade_between
 
-from src.interface.mode import Mode
+from ...interface.mode import Mode
 
 
 class KeyboardPress(Mode):

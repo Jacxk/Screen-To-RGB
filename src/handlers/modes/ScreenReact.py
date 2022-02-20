@@ -3,7 +3,7 @@ from PIL import Image
 from mss import mss
 from scipy import cluster
 
-from src.interface.mode import Mode
+from ...interface.mode import Mode
 
 
 class ScreenReact(Mode):
