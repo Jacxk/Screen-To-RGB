@@ -12,14 +12,15 @@ class Mode:
 
         self.sdks = kwargs.get("sdks", [])
         self.enabled = kwargs.get("enable", True)
-        self.color = kwargs.get("color", (0, 0, 0))
+        self.color = kwargs.get("color", None)
+        
+        print(f"Enabling {self.name}.")
 
         if self.enabled:
             self.enable()
 
         available_modes.append(self)
         self.available_modes = available_modes
-        print(f"Enabling ${self.name}.")
 
     def start(self):
         if self.running_thread is None:
@@ -31,7 +32,7 @@ class Mode:
         """
         Starts running the RGB mode.
         """
-        print(f"Running mode '{self.name}'...")
+        print(f"    Running mode '{self.name}'...")
         for mode in available_modes:
             if mode.enabled and mode.active and mode.name is not self.name:
                 mode._too_many = True
@@ -49,7 +50,7 @@ class Mode:
         """
         Enables this mode.
         """
-        print(f"Mode '{self.name}' has been enabled")
+        print(f"    Mode '{self.name}' has been enabled")
         self.enabled = True
         self.active = True
         return self
