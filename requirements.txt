@@ -14,7 +14,7 @@ mccabe==0.7.0
 mss==6.1.0
 numpy==1.22.2
 pefile==2021.9.3
-Pillow==9.0.1
+Pillow==10.0.1
 ply==3.11
 pybind11==2.9.1
 pycodestyle==2.8.0
